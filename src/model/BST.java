@@ -92,16 +92,17 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
     }
 	
 	public int getHeight(Node<K,V> current, int height) {
-
+		
+		int helper1=height;
+		int helper2=height;
+		
         if(current.getLeft() != null) {
-            height++;
-            int helper1=getHeight(current, height);
-
+        	
+            helper1=getHeight(current.getLeft(), height + 1);
+            
         }if (current.getRight() != null){
-
-            height++;
-            int helper2=getHeight(current, height);
-
+        	
+            helper2=getHeight(current.getRight(), height + 1);
         }
 
         if(helper1 < helper2) {
@@ -109,7 +110,6 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
         }else {
             return helper1;
         }
-
     }
 
 	@Override
