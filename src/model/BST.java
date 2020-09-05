@@ -46,8 +46,7 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
 		}
 	}
 
-	@Override
-	public Node<K,V> searchE(K key) {
+	private Node<K,V> search(K key) {
 		
 		Node<K,V> current = root;
 		boolean wasFounded=false;
@@ -62,6 +61,11 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
 			}
 		}
 		return current;
+	}
+	
+	@Override
+	public V searchE(K key) {
+		return search(key).getValue();
 	}
 
 	@Override
@@ -154,15 +158,15 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
 			return content;
 		}else {
 			content += current.toString()+"\n";
-			content += postOrden(current.getLeft(), content);
-			content += postOrden(current.getRight(), content);
+			content += preOrden(current.getLeft(), content);
+			content += preOrden(current.getRight(), content);
 			return content;
 		}
 	}
 	
 	@Override
 	public boolean removeE(K key) {
-		Node<K,V> element = searchE(key);
+		Node<K,V> element = search(key);
 		return removeE(element);
 	}
 		
