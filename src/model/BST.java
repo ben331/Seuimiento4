@@ -74,13 +74,13 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
 	}
 	
 	private int getSize(Node<K,V> current, int size) {
+		
 		if(current==null){
 			return size;
 		}else {
-			size+=getSize(current.getLeft(), size);
-			size++;
-			size+=getSize(current.getRight(), size);
-			return size;
+			int sizeLeft=getSize(current.getLeft(), size);
+			int sizeRight=getSize(current.getRight(), size);
+			return sizeLeft + sizeRight + 1;
 		}
 	}
 
@@ -97,70 +97,70 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
 	
 	public int getHeight(Node<K,V> current, int height) {
 		
-		int helper1=height;
-		int helper2=height;
+		int heightLeft=height;
+		int heightRigth=height;
 		
         if(current.getLeft() != null) {
         	
-            helper1=getHeight(current.getLeft(), height + 1);
+            heightLeft=getHeight(current.getLeft(), height + 1);
             
         }if (current.getRight() != null){
         	
-            helper2=getHeight(current.getRight(), height + 1);
+        	heightRigth=getHeight(current.getRight(), height + 1);
         }
 
-        if(helper1 < helper2) {
-            return helper2;
+        if(heightLeft < heightRigth) {
+            return heightRigth;
         }else {
-            return helper1;
+            return heightLeft;
         }
     }
 
 	@Override
 	public String inOrden() {
-		return inOrden(root, "");
+		return inOrden(root);
 	}
 	
-	private String inOrden(Node<K,V> current, String content) {
+	private String inOrden(Node<K,V> current) {
 		if(current==null) {
-			return content;
+			return "";
 		}else {
-			content += inOrden(current.getLeft(), content);
-			content += current.toString()+"\n";
-			content += inOrden(current.getRight(), content);
-			return content;
+			String contentLeft = inOrden(current.getLeft());
+			String contentRight = inOrden(current.getRight());
+			
+			return contentLeft + current.toString() + "\n" + contentRight;
 		}
 	}
 
 	@Override
 	public String postOrden() {
-		return postOrden(root, "");
+		return postOrden(root);
 	}
 	
-	private String postOrden(Node<K,V> current, String content) {
+	private String postOrden(Node<K,V> current) {
 		if(current==null) {
-			return content;
+			return "";
 		}else {
-			content += postOrden(current.getLeft(), content);
-			content += postOrden(current.getRight(), content);
-			content += current.toString()+"\n";
-			return content;
+			String contentLeft = postOrden(current.getLeft());
+			String contentRight = postOrden(current.getRight());
+			
+			return contentLeft + contentRight + current.toString() + "\n";
 		}
 	}
 
 	@Override
 	public String preOrden() {
-		return preOrden(root, "");
+		return preOrden(root);
 	}
 	
-	private String preOrden(Node<K,V> current, String content) {
+	private String preOrden(Node<K,V> current) {
 		if(current==null) {
-			return content;
+			return "";
 		}else {
-			content += current.toString()+"\n";
-			content += preOrden(current.getLeft(), content);
-			content += preOrden(current.getRight(), content);
-			return content;
+			String contentLeft = preOrden(current.getLeft());
+			String contentRight = preOrden(current.getRight());
+			
+			return current.toString() + "\n" +contentLeft + contentRight;
 		}
 	}
 	
