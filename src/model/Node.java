@@ -59,4 +59,9 @@ public class Node<K extends Comparable<K>,V> {
 		}
 		return min;
 	}
+	
+	@Override
+	public String toString() {
+		return value.toString();
+	}
 }
