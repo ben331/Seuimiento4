@@ -30,7 +30,13 @@ public class Main {
 			person = new Person(name, id);
 			tree.insertE(id, person);
 		}
-		
+		System.out.println("Size: "+tree.getSize());
+		System.out.println("Height: "+tree.getHeight());
+		System.out.println("\nInorden: ");
 		System.out.println(tree.inOrden());
+		System.out.println("\nPreOrden: "+tree.preOrden());
+		System.out.println("\nPostOrden: "+tree.postOrden());
+		
+		reader.close();
 	}
 }
