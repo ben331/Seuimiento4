@@ -25,7 +25,7 @@ public class BST<K extends Comparable<K>, V> implements IBST<K,V>{
 			boolean added = false;
 			while(!added) {
 				
-				if(current.getKey().compareTo(element.getKey())<0) {
+				if(current.getKey().compareTo(element.getKey())>0) {
 					if(current.getLeft()==null) {
 						current.setLeft(element);
 						element.setHead(current);
